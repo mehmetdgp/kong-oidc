@@ -9,7 +9,21 @@ local openidc = require("kong.plugins.oidc.openidc")
 
 function OidcHandler:access(config)
   local oidcConfig = utils.get_options(config, ngx)
+ 
+  local function stringify(obj)
+    if type(obj) == "table" then
+      local s = "{ "
+      for k, v in pairs(obj) do
+        if type(k) ~= "number" then k = '"' .. k .. '"' end
+        s = s .. "[" .. k .. "] = " .. stringify(v) .. ","
+      end
+      return s .. "} "
+    else
+      return tostring(obj)
+    end
+  end
 
+  kong.log.info("mzk-oidc-config: " .. stringify(oidcConfig))
   local service = kong.router.get_service()
 
     if service then

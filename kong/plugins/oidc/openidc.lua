@@ -1654,7 +1654,7 @@ end
 
 -- get a valid access_token (eventually refreshing the token), or nil if there's no valid access_token
 function openidc.access_token(opts, session_opts)
-
+  log(DEBUG, "mzk access_token: ")
   local session = r_session.start(session_opts)
   local token, err = openidc_access_token(opts, session, true)
   session:close()

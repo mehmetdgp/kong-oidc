@@ -208,6 +208,7 @@ end
 
 function M.has_bearer_access_token()
   local header = ngx.req.get_headers()['Authorization']
+  kong.log.info("mzk utils one")
   if header and header:find(" ") then
     local divider = header:find(' ')
     if string.lower(header:sub(0, divider-1)) == string.lower("Bearer") then

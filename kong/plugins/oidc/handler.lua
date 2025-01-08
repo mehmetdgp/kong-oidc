@@ -27,7 +27,7 @@ function OidcHandler:access(config)
   local service = kong.router.get_service()
 
     if service then
-        kong.log.info("Service ID mzk-second third fourth : " .. service.id)
+        kong.log.info("Service ID mzk-second third fourth fifth : " .. service.id)
         kong.log.info("Service Name: " .. service.name)
         -- Diğer service özelliklerine erişim sağlanabilir
     else
@@ -86,10 +86,12 @@ end
 function handle(oidcConfig)
   local response
   local err
+  kong.log.info('mzk handle one')
 
   if oidcConfig.bearer_jwt_auth_enable then
     response,err,has_token_header = verify_bearer_jwt(oidcConfig)
-    
+    kong.log.info('mzk handle two' .. tostring(has_token_header))
+
     if oidcConfig.disable_jwt_validation and has_token_header then
       ngx.log(ngx.DEBUG, "disable validation : true")
       return

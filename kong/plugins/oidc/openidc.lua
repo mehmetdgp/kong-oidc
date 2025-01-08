@@ -1708,7 +1708,7 @@ local function openidc_get_bearer_access_token(opts)
     return openidc_get_bearer_access_token_from_cookie(opts)
   end
  
-    log(DEBUG, "mzk get-token-function second" .. opts.auth_accept_token_as_header_name)
+    log(DEBUG, "mzk get-token-function second")
 
   -- get the access token from the Authorization header
   local headers = ngx.req.get_headers()

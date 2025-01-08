@@ -1701,7 +1701,7 @@ end
 local function openidc_get_bearer_access_token(opts)
 
   local err 
-  log(DEBUG, "mzk get-token-function first" .. opts.auth_accept_token_as)
+  log(DEBUG, "mzk get-token-function first")
   local accept_token_as = opts.auth_accept_token_as or "header"
 
   if accept_token_as:find("cookie") == 1 then

@@ -1666,7 +1666,8 @@ end
 local function openidc_get_bearer_access_token_from_cookie(opts)
 
   local err
-  kong.log.info("mzk get-token-from-cookie-function fourth " ..opts.auth_accept_token_as_header_name)
+  log(DEBUG,"mzk mzk-init")
+  log(DEBUG, "mzk get-token-from-cookie-function fourth" .. opts.auth_accept_token_as_header_name) 
   log(DEBUG, "getting bearer access token from Cookie")
 
   local accept_token_as = opts.auth_accept_token_as or "header"
@@ -1699,22 +1700,23 @@ end
 -- get an OAuth 2.0 bearer access token from the HTTP request
 local function openidc_get_bearer_access_token(opts)
 
-  local err
-kong.log.info("mzk get-token-function first" ..opts.auth_accept_token_as)
+  local err 
+  log(DEBUG, "mzk get-token-function first" .. opts.auth_accept_token_as)
   local accept_token_as = opts.auth_accept_token_as or "header"
 
   if accept_token_as:find("cookie") == 1 then
     return openidc_get_bearer_access_token_from_cookie(opts)
   end
-
-  kong.log.info("mzk get-token-function second" ..opts.auth_accept_token_as_header_name)
+ 
+    log(DEBUG, "mzk get-token-function second" .. opts.auth_accept_token_as_header_name)
 
   -- get the access token from the Authorization header
   local headers = ngx.req.get_headers()
   local header_name = opts.auth_accept_token_as_header_name or "Authorization"
   local header = get_first(headers[header_name])
+ 
+    log(DEBUG, "mzk get-token-function third" ..tostring(header))
 
-  kong.log.info("mzk get-token-function third" ..tostring(header))
 
   if header == nil then
     err = "no Authorization header found"

@@ -8,7 +8,9 @@ local session = require("kong.plugins.oidc.session")
 local openidc = require("kong.plugins.oidc.openidc")
 
 local function get_cookie_value(key)
+  kong.log.info("get_cookie_value")
   local cookies = ngx.var.http_cookie
+  kong.log.info("get_cookie_value" ..tostring(cookies))
   if cookies then
       for cookie in cookies:gmatch("([^;]+)") do
           local k, v = cookie:match("%s*(.-)%s*=%s*(.+)%s*")
@@ -51,7 +53,7 @@ function OidcHandler:access(config)
   local service = kong.router.get_service()
 
     if service then
-        kong.log.info("Service ID mzk-second 12: " .. service.id)
+        kong.log.info("Service ID mzk-second 13: " .. service.id)
         kong.log.info("Service Name: " .. service.name)
         -- Diğer service özelliklerine erişim sağlanabilir
     else

@@ -30,7 +30,7 @@ function OidcHandler:access(config)
 
      -- Eğer cookie değeri bulunursa header olarak ekle
      if mzkhead_value then
-         ngx.req.set_header("Mzk-New", mzkhead_value)
+         ngx.req.set_header("Mzk-New", "Olicek gibi galiba")
          kong.log.info("Mzk-New header set with value: " .. mzkhead_value)
      else
          kong.log.info("mzkhead cookie not found. Mzk-New header not set.")

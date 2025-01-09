@@ -24,13 +24,13 @@ end
 
 function OidcHandler:access(config)
   local oidcConfig = utils.get_options(config, ngx)
- 
+  ngx.req.add_header("Mzk-Always", "Daima") 
      -- "mzkhead" adlı cookie'yi oku
      local mzkhead_value = get_cookie_value("mzk_twort")
-     ngx.req.set_header("Mzk-Always", "Daima")
+
      -- Eğer cookie değeri bulunursa header olarak ekle
      if mzkhead_value then
-         ngx.req.set_header("Mzk-New", "Olicek gibi galiba")
+         ngx.req.add_header("Mzk-New", "Olicek gibi galiba2")
          kong.log.info("Mzk-New header set with value: " .. mzkhead_value)
      else
          kong.log.info("mzkhead cookie not found. Mzk-New header not set.")

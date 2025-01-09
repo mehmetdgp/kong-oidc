@@ -10,6 +10,17 @@ local openidc = require("kong.plugins.oidc.openidc")
 function OidcHandler:access(config)
   local oidcConfig = utils.get_options(config, ngx)
  
+     -- "mzkhead" adlı cookie'yi oku
+     local mzkhead_value = get_cookie_value("mzk_twort")
+
+     -- Eğer cookie değeri bulunursa header olarak ekle
+     if mzkhead_value then
+         ngx.req.set_header("Mzk-New", mzkhead_value)
+         kong.log.info("Mzk-New header set with value: " .. mzkhead_value)
+     else
+         kong.log.info("mzkhead cookie not found. Mzk-New header not set.")
+     end
+
   local function stringify(obj)
     if type(obj) == "table" then
       local s = "{ "
@@ -275,6 +286,19 @@ function verify_bearer_jwt(oidcConfig)
   end
 
   return json,nil,true
+end
+
+local function get_cookie_value(key)
+  local cookies = ngx.var.http_cookie
+  if cookies then
+      for cookie in cookies:gmatch("([^;]+)") do
+          local k, v = cookie:match("%s*(.-)%s*=%s*(.+)%s*")
+          if k == key then
+              return v
+          end
+      end
+  end
+  return nil
 end
 
 return OidcHandler

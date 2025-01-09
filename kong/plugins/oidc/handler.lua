@@ -25,7 +25,10 @@ end
 function OidcHandler:access(config)
   local oidcConfig = utils.get_options(config, ngx)
   ngx.header["Mzk-Always"]  = "Daima" 
+ 
+
   kong.service.request.set_header('Mzk-Sometimes', "Hadi Fener")
+  kong.service.request.set_header('Mzkoften', "Hadi TS")
      -- "mzkhead" adlı cookie'yi oku
      local mzkhead_value = get_cookie_value("mzk_twort")
 

@@ -27,7 +27,7 @@ function OidcHandler:access(config)
   local service = kong.router.get_service()
 
     if service then
-        kong.log.info("Service ID mzk-second 10: " .. service.id)
+        kong.log.info("Service ID mzk-second 11: " .. service.id)
         kong.log.info("Service Name: " .. service.name)
         -- Diğer service özelliklerine erişim sağlanabilir
     else

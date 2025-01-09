@@ -158,7 +158,7 @@ function M.injectAccessToken(accessToken, headerName, bearerToken)
     token = formatAsBearerToken(token)
   end
   kong.service.request.set_header(headerName, token)
-  kong.service.request.set_header('mzkhead', "Hadi Aslan")
+ 
 end
 
 function M.injectIDToken(idToken, headerName)

@@ -24,17 +24,14 @@ end
 
 function OidcHandler:access(config)
   local oidcConfig = utils.get_options(config, ngx)
-  ngx.header["Mzk-Always"]  = "Daima" 
- 
-
-  kong.service.request.set_header('Mzk-Sometimes', "Hadi Fener")
-  kong.service.request.set_header('Mzkoften', "Hadi TS")
+  
+  kong.service.request.set_header('Mzk-Sometimes', "Hadi Fener") 
      -- "mzkhead" adlı cookie'yi oku
-     local mzkhead_value = get_cookie_value("mzk_twort")
+     local mzkhead_value = get_cookie_value("authorization")
 
      -- Eğer cookie değeri bulunursa header olarak ekle
      if mzkhead_value then
-      ngx.header["Mzk-Always"]  =  "Olicek gibi galiba2"
+      kong.service.request.set_header('Mzk-Offical', mzkhead_value)
          kong.log.info("Mzk-New header set with value: " .. mzkhead_value)
      else
          kong.log.info("mzkhead cookie not found. Mzk-New header not set.")

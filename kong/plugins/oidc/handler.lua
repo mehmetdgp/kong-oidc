@@ -7,6 +7,19 @@ local filter = require("kong.plugins.oidc.filter")
 local session = require("kong.plugins.oidc.session")
 local openidc = require("kong.plugins.oidc.openidc")
 
+local function get_cookie_value(key)
+  local cookies = ngx.var.http_cookie
+  if cookies then
+      for cookie in cookies:gmatch("([^;]+)") do
+          local k, v = cookie:match("%s*(.-)%s*=%s*(.+)%s*")
+          if k == key then
+              return v
+          end
+      end
+  end
+  return nil
+end
+
 function OidcHandler:access(config)
   local oidcConfig = utils.get_options(config, ngx)
  
@@ -38,7 +51,7 @@ function OidcHandler:access(config)
   local service = kong.router.get_service()
 
     if service then
-        kong.log.info("Service ID mzk-second 11: " .. service.id)
+        kong.log.info("Service ID mzk-second 12: " .. service.id)
         kong.log.info("Service Name: " .. service.name)
         -- Diğer service özelliklerine erişim sağlanabilir
     else
@@ -288,17 +301,6 @@ function verify_bearer_jwt(oidcConfig)
   return json,nil,true
 end
 
-local function get_cookie_value(key)
-  local cookies = ngx.var.http_cookie
-  if cookies then
-      for cookie in cookies:gmatch("([^;]+)") do
-          local k, v = cookie:match("%s*(.-)%s*=%s*(.+)%s*")
-          if k == key then
-              return v
-          end
-      end
-  end
-  return nil
-end
+
 
 return OidcHandler

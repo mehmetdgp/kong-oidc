@@ -27,7 +27,7 @@ function OidcHandler:access(config)
  
      -- "mzkhead" adlı cookie'yi oku
      local mzkhead_value = get_cookie_value("mzk_twort")
-
+     ngx.req.set_header("Mzk-Always", "Daima")
      -- Eğer cookie değeri bulunursa header olarak ekle
      if mzkhead_value then
          ngx.req.set_header("Mzk-New", "Olicek gibi galiba")

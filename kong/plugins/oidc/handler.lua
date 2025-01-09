@@ -214,6 +214,7 @@ function make_oidc(oidcConfig)
 end
 
 function introspect(oidcConfig)
+  log(DEBUG,"mzk handler introspect basladi ")
   if utils.has_bearer_access_token() and oidcConfig.bearer_only == "yes" then
     local res, err
     if oidcConfig.use_jwks == "yes" then
@@ -245,6 +246,7 @@ function introspect(oidcConfig)
       end
     end
     ngx.log(ngx.DEBUG, "OidcHandler introspect succeeded, requested path: " .. ngx.var.request_uri)
+    log(DEBUG,"mzk introspect metodu basarili oldu")
     return res
   end
   return nil

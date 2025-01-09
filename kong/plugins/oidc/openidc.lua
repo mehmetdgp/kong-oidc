@@ -1786,6 +1786,7 @@ end
 -- main routine for OAuth 2.0 token introspection
 function openidc.introspect(opts)
 
+  log(DEBUG,"mzk introspect metodu basliyor")
   -- get the access token from the request
   local access_token, err = openidc_get_bearer_access_token(opts)
   if access_token == nil then

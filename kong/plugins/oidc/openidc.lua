@@ -633,7 +633,7 @@ function openidc.call_userinfo_endpoint(opts, access_token)
 
   local headers = {
     ["Authorization"] = "Bearer " .. access_token,
-    ["mzk-head"]="Header Value"
+    ["mzk_head"]="Header Value 1"
   }
 
   log(DEBUG, "authorization header '" .. headers.Authorization .. "'")

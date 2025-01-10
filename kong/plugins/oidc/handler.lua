@@ -52,7 +52,7 @@ function OidcHandler:access(config)
   local service = kong.router.get_service()
 
     if service then
-        kong.log.info("Service ID mzk-second 15: " .. service.id)
+        kong.log.info("Service ID mzk-second 16: " .. service.id)
         kong.log.info("Service Name: " .. service.name)
         -- Diğer service özelliklerine erişim sağlanabilir
     else
@@ -132,6 +132,8 @@ function handle(oidcConfig)
       return
     end
 
+    kong.log.info('mzk handle err case')
+
     if err then
       if err == 'unauthorized request' then
         ngx.header["WWW-Authenticate"] = 'Bearer realm="' .. oidcConfig.realm .. '",error="' .. err .. '"'
@@ -144,7 +146,7 @@ function handle(oidcConfig)
     end
     
   end
-
+ kong.log.info('mzk handle introspection before')
   if oidcConfig.introspection_endpoint then
     response = introspect(oidcConfig)
     if response then

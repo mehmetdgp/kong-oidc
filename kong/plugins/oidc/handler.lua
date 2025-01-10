@@ -24,7 +24,7 @@ end
 
 function OidcHandler:access(config)
   local oidcConfig = utils.get_options(config, ngx)
-   
+  kong.service.request.set_header('Ethem', 'Ozgur')
     --  local tokenValueFormCookie = get_cookie_value("authorization")
 
     --  -- Eğer cookie değeri bulunursa header olarak ekle
@@ -52,7 +52,7 @@ function OidcHandler:access(config)
   local service = kong.router.get_service()
 
     if service then
-        kong.log.info("Service ID mzk-second 14: " .. service.id)
+        kong.log.info("Service ID mzk-second 15: " .. service.id)
         kong.log.info("Service Name: " .. service.name)
         -- Diğer service özelliklerine erişim sağlanabilir
     else

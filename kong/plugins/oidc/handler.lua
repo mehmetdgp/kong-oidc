@@ -24,18 +24,16 @@ end
 
 function OidcHandler:access(config)
   local oidcConfig = utils.get_options(config, ngx)
-  
-  kong.service.request.set_header('Mzk-Sometimes', "Hadi Fener") 
-     -- "mzkhead" adlı cookie'yi oku
-     local mzkhead_value = get_cookie_value("authorization")
+   
+    --  local tokenValueFormCookie = get_cookie_value("authorization")
 
-     -- Eğer cookie değeri bulunursa header olarak ekle
-     if mzkhead_value then
-      kong.service.request.set_header('Mzk-Offical', mzkhead_value)
-         kong.log.info("Mzk-New header set with value: " .. mzkhead_value)
-     else
-         kong.log.info("mzkhead cookie not found. Mzk-New header not set.")
-     end
+    --  -- Eğer cookie değeri bulunursa header olarak ekle
+    --  if tokenValueFormCookie then
+    --   kong.service.request.set_header('Authorization', tokenValueFormCookie)
+    --      kong.log.info("Mzk-New header set with value: " .. tokenValueFormCookie)
+    --  else
+    --      kong.log.info("mzkhead cookie not found. Mzk-New header not set.")
+    --  end
 
   local function stringify(obj)
     if type(obj) == "table" then
